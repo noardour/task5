@@ -1,13 +1,15 @@
-import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { FC, useEffect } from "react";
 import useAppSelector from "../../hooks/useAppSelector";
 import { selectUsers } from "./usersSelectors";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import { generateUsers } from "./usersActions";
+import useObserver from "../../hooks/useObserver";
 
 const UsersTable: FC = () => {
   const users = useAppSelector(selectUsers);
   const dispatch = useAppDispatch();
+  const ref = useObserver(() => dispatch(generateUsers(30)));
 
   useEffect(() => {
     dispatch(generateUsers(30));
@@ -37,6 +39,7 @@ const UsersTable: FC = () => {
           ))}
         </TableBody>
       </Table>
+      <Box sx={{ width: "100%", height: "1px" }} ref={ref} />
     </TableContainer>
   );
 };

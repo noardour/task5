@@ -20,7 +20,7 @@ const slice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(generateUsers.fulfilled, (state, action: PayloadAction<IUser[]>) => {
-      state.data = action.payload;
+      state.data = state.data.concat(action.payload);
       state.isLoading = false;
     });
     builder.addCase(generateUsers.rejected, (state) => {
