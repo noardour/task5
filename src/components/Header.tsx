@@ -1,12 +1,11 @@
-import { AppBar, Container, Toolbar, Typography } from "@mui/material";
+import { AppBar, Container } from "@mui/material";
 import { FC } from "react";
+import UserToolbar from "../features/Users/UserToolbar";
 
 const Header: FC = () => (
   <AppBar position="static">
     <Container>
-      <Toolbar>
-        <Typography variant="h4">App</Typography>
-      </Toolbar>
+      <UserToolbar />
     </Container>
   </AppBar>
 );

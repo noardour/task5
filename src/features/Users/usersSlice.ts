@@ -1,39 +1,32 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "./types";
+import { generateUsers } from "./usersActions";
 
 export interface UsersState {
+  isLoading: boolean;
   data: IUser[];
 }
 
 const initialState: UsersState = {
-  data: [
-    {
-      num: 1,
-      id: "12341234",
-      fullName: "Name Namev Namovich",
-      address: "gorod Novigrad",
-      phone: "+1 11 111-11-11",
-    },
-    {
-      num: 2,
-      id: "sdfsddff",
-      fullName: "Test Testov Testovich",
-      address: "gorod Novigrad",
-      phone: "+1 11 111-11-11",
-    },
-    {
-      num: 3,
-      id: "sefsefsef",
-      fullName: "Name Namev Namovich",
-      address: "gorod Novigrad",
-      phone: "+1 11 111-11-11",
-    },
-  ],
+  isLoading: false,
+  data: [],
 };
 
 const slice = createSlice({
   name: "users",
   reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(generateUsers.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(generateUsers.fulfilled, (state, action: PayloadAction<IUser[]>) => {
+      state.data = action.payload;
+      state.isLoading = false;
+    });
+    builder.addCase(generateUsers.rejected, (state) => {
+      state.isLoading = false;
+    });
+  },
   initialState,
 });
 

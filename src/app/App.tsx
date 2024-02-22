@@ -7,7 +7,7 @@ function App() {
     <>
       <CssBaseline />
       <Header />
-      <Box sx={{ paddingTop: "40px" }}>
+      <Box sx={{ paddingTop: "40px", paddingBottom: "40px" }}>
         <Container>
           <UsersTable />
         </Container>

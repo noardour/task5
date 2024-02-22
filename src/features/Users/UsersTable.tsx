@@ -1,10 +1,17 @@
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import useAppSelector from "../../hooks/useAppSelector";
 import { selectUsers } from "./usersSelectors";
+import useAppDispatch from "../../hooks/useAppDispatch";
+import { generateUsers } from "./usersActions";
 
 const UsersTable: FC = () => {
   const users = useAppSelector(selectUsers);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(generateUsers(30));
+  }, []);
 
   return (
     <TableContainer component={Paper}>
@@ -20,7 +27,7 @@ const UsersTable: FC = () => {
         </TableHead>
         <TableBody>
           {users.map((user) => (
-            <TableRow>
+            <TableRow key={user.id}>
               <TableCell>{user.num}</TableCell>
               <TableCell>{user.id}</TableCell>
               <TableCell>{user.fullName}</TableCell>
