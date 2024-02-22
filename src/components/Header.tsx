@@ -2,7 +2,7 @@ import { AppBar, Container, Toolbar, Typography } from "@mui/material";
 import { FC } from "react";
 
 const Header: FC = () => (
-  <AppBar>
+  <AppBar position="static">
     <Container>
       <Toolbar>
         <Typography variant="h4">App</Typography>
