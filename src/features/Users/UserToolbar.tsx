@@ -10,7 +10,6 @@ const UserToolbar: FC = () => {
   const generationConfig = useAppSelector(selectGenerationConfig);
   const [state, setState] = useState<GenerationConfig>(generationConfig);
   const dispatch = useAppDispatch();
-  const errStep = 1;
 
   const applyConfig = useDebounce(() => {
     dispatch(setGenerationConfig(state));
@@ -47,12 +46,12 @@ const UserToolbar: FC = () => {
       </Select>
       <TextField size="small" label="Seed:" type="number" name="seed" value={state.seed} onInput={handleSeed} />
       <Box sx={{ display: "flex", gap: "30px" }}>
-        <Slider value={state.errCount} onChange={handleErrSlider} min={0} max={10} step={errStep} sx={{ width: "150px" }} />
+        <Slider value={state.errCount} onChange={handleErrSlider} min={0} max={10} step={0.01} sx={{ width: "150px" }} />
         <Input
           value={state.errCount}
           onChange={handleErrInput}
           inputProps={{
-            step: errStep,
+            step: 1,
             min: 0,
             max: 1000,
             type: "number",

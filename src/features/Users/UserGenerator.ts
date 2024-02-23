@@ -43,6 +43,11 @@ export default class UserGenerator {
     this.#counter = 0;
   }
 
+  #randomRound(n: number) {
+    const r = this.#faker.number.float();
+    return r < n % 1 ? Math.floor(++n) : Math.floor(n);
+  }
+
   #addRandomSymbol(str: string): string {
     const char = this.#alphabets[this.#locale][this.#faker.number.int({ max: this.#alphabets[this.#locale].length - 1 })];
     if (str.length < 1) return char;
@@ -76,7 +81,7 @@ export default class UserGenerator {
   }
 
   #makeErrors(user: IUser) {
-    for (let i = 0; i < this.#errCount; i++) {
+    for (let i = 0; i < this.#randomRound(this.#errCount); i++) {
       this.#makeError(user, i);
     }
   }
