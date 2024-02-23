@@ -1,27 +1,20 @@
-import { Faker, fakerDE, fakerFR, fakerPL } from "@faker-js/faker";
 import useAppSelector from "../../hooks/useAppSelector";
 import { selectGenerationConfig } from "./usersSelectors";
 import useAppDispatch from "../../hooks/useAppDispatch";
-import { GenerationLocales, addUsers, clean } from "./usersSlice";
+import { addUsers, clean } from "./usersSlice";
 import { useEffect, useRef } from "react";
 import UserGenerator from "./UserGenerator";
-
-const fakers: Record<GenerationLocales, Faker> = {
-  "de-DE": fakerDE,
-  "fr-FR": fakerFR,
-  "pl-PL": fakerPL,
-};
 
 const useUserGenerator = () => {
   const config = useAppSelector(selectGenerationConfig);
   const dispatch = useAppDispatch();
-  const generatorRef = useRef(new UserGenerator(fakers[config.locale]));
+  const generatorRef = useRef(new UserGenerator(config.locale));
 
   useEffect(() => {
     dispatch(clean());
 
     generatorRef.current.setErrCount(config.errCount || 0);
-    generatorRef.current.setFaker(fakers[config.locale]);
+    generatorRef.current.setLocale(config.locale);
     generatorRef.current.setSeed(parseInt(config.seed) || undefined);
 
     generatorRef.current.cleanCounter();
