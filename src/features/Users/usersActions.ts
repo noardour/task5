@@ -7,8 +7,8 @@ import { faker } from "@faker-js/faker";
 export const generateUsers = createAsyncThunk(
   "users/generate",
   (count: number, thunk) => {
-    const state = thunk.getState() as RootState;
     faker.seed(1);
+    const state = thunk.getState() as RootState;
     return Array.from({ length: count }, (_, i) => {
       return {
         num: i + selectUsersCount(state) + 1,

@@ -1,39 +1,40 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "./types";
-import { generateUsers } from "./usersActions";
+
+export interface GenerationConfig {
+  seed?: string;
+}
 
 export interface UsersState {
   isLoading: boolean;
   data: IUser[];
+  generationConfig: GenerationConfig;
 }
 
 const initialState: UsersState = {
   isLoading: false,
   data: [],
+  generationConfig: {
+    seed: undefined,
+  },
 };
 
 const slice = createSlice({
   name: "users",
   reducers: {
+    addUsers: (state, action: PayloadAction<IUser[]>) => {
+      state.data = state.data.concat(action.payload);
+    },
+    setGenerationConfig: (state, action: PayloadAction<GenerationConfig>) => {
+      state.generationConfig = { ...state.generationConfig, ...action.payload };
+    },
     clean: (state) => {
       state.data = [];
     },
   },
-  extraReducers: (builder) => {
-    builder.addCase(generateUsers.pending, (state) => {
-      state.isLoading = true;
-    });
-    builder.addCase(generateUsers.fulfilled, (state, action: PayloadAction<IUser[]>) => {
-      state.data = state.data.concat(action.payload);
-      state.isLoading = false;
-    });
-    builder.addCase(generateUsers.rejected, (state) => {
-      state.isLoading = false;
-    });
-  },
   initialState,
 });
 
-export const { clean } = slice.actions;
+export const { addUsers, setGenerationConfig, clean } = slice.actions;
 
 export default slice.reducer;
