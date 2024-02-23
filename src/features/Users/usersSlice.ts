@@ -6,6 +6,7 @@ export type GenerationLocales = "de-DE" | "fr-FR" | "pl-PL";
 export interface GenerationConfig {
   seed: string;
   locale: GenerationLocales;
+  errCount: number;
 }
 
 export interface UsersState {
@@ -20,6 +21,7 @@ const initialState: UsersState = {
   generationConfig: {
     seed: "",
     locale: "de-DE",
+    errCount: 0,
   },
 };
 

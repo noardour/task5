@@ -3,7 +3,7 @@ import { FC } from "react";
 import UserToolbar from "../features/Users/UserToolbar";
 
 const Header: FC = () => (
-  <AppBar position="static" sx={{ backgroundColor: "gray" }}>
+  <AppBar position="static" sx={{ backgroundColor: "#f2f2f2" }}>
     <Container>
       <UserToolbar />
     </Container>

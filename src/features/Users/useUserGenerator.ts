@@ -20,6 +20,7 @@ const useUserGenerator = () => {
   useEffect(() => {
     dispatch(clean());
 
+    generatorRef.current.setErrCount(config.errCount || 0);
     generatorRef.current.setFaker(fakers[config.locale]);
     generatorRef.current.setSeed(parseInt(config.seed) || undefined);
 
