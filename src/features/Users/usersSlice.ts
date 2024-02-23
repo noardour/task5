@@ -2,7 +2,7 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "./types";
 
 export interface GenerationConfig {
-  seed?: string;
+  seed: string;
 }
 
 export interface UsersState {
@@ -15,7 +15,7 @@ const initialState: UsersState = {
   isLoading: false,
   data: [],
   generationConfig: {
-    seed: undefined,
+    seed: "",
   },
 };
 
@@ -25,7 +25,7 @@ const slice = createSlice({
     addUsers: (state, action: PayloadAction<IUser[]>) => {
       state.data = state.data.concat(action.payload);
     },
-    setGenerationConfig: (state, action: PayloadAction<GenerationConfig>) => {
+    setGenerationConfig: (state, action: PayloadAction<Partial<GenerationConfig>>) => {
       state.generationConfig = { ...state.generationConfig, ...action.payload };
     },
     clean: (state) => {

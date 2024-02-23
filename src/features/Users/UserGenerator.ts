@@ -10,7 +10,7 @@ export default class UserGenerator {
     this.#counter = 0;
   }
 
-  setSeed(seed: number) {
+  setSeed(seed: number | undefined) {
     this.#faker.seed(seed);
   }
 
@@ -29,7 +29,6 @@ export default class UserGenerator {
   }
 
   generate(count: number): IUser[] {
-    console.log(this.#counter);
     return Array.from({ length: count }, () => this.#generateUser());
   }
 }

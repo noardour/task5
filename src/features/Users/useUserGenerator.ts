@@ -14,7 +14,7 @@ const useUserGenerator = () => {
   useEffect(() => {
     dispatch(clean());
 
-    config.seed && generatorRef.current.setSeed(parseInt(config.seed));
+    generatorRef.current.setSeed(parseInt(config.seed) || undefined);
 
     generatorRef.current.cleanCounter();
   }, [config]);
