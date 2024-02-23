@@ -8,7 +8,7 @@ import useUserGenerator from "./useUserGenerator";
 const UsersTable: FC = () => {
   const users = useAppSelector(selectUsers);
   const generate = useUserGenerator();
-  const ref = useObserver(() => generate());
+  const ref = useObserver(() => generate(20));
 
   return (
     <TableContainer component={Paper}>

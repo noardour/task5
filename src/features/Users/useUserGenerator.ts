@@ -20,8 +20,8 @@ const useUserGenerator = () => {
     generatorRef.current.cleanCounter();
   }, [config]);
 
-  return () => {
-    dispatch(addUsers(generatorRef.current.generate(30)));
+  return (count: number) => {
+    dispatch(addUsers(generatorRef.current.generate(count)));
   };
 };
 
