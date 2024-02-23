@@ -14,7 +14,11 @@ const initialState: UsersState = {
 
 const slice = createSlice({
   name: "users",
-  reducers: {},
+  reducers: {
+    clean: (state) => {
+      state.data = [];
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(generateUsers.pending, (state) => {
       state.isLoading = true;
@@ -29,5 +33,7 @@ const slice = createSlice({
   },
   initialState,
 });
+
+export const { clean } = slice.actions;
 
 export default slice.reducer;

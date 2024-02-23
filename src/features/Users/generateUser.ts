@@ -1,12 +1,9 @@
 import { faker } from "@faker-js/faker";
 import { IUser } from "./types";
 
-let counter = 0;
-
-export default function generateUser(): IUser {
-  console.log(counter);
+export default function generateUser(num: number): IUser {
   return {
-    num: ++counter,
+    num,
     id: faker.string.uuid(),
     fullName: faker.person.fullName(),
     address: faker.location.streetAddress(true),

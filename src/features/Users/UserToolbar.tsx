@@ -1,12 +1,18 @@
-import { Toolbar, Typography } from "@mui/material";
+import { Button, Toolbar } from "@mui/material";
 import { FC } from "react";
+import useAppDispatch from "../../hooks/useAppDispatch";
+import { clean } from "./usersSlice";
 
-const UserToolbar: FC = () => (
-  <Toolbar>
-    <Typography variant="h5" sx={{ fontWeight: "bold" }}>
-      App
-    </Typography>
-  </Toolbar>
-);
+const UserToolbar: FC = () => {
+  const dispatch = useAppDispatch();
+
+  return (
+    <Toolbar>
+      <Button sx={{ color: "white" }} onClick={() => dispatch(clean())}>
+        Clean
+      </Button>
+    </Toolbar>
+  );
+};
 
 export default UserToolbar;
