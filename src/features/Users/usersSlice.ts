@@ -1,8 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { IUser } from "./types";
 
+export type GenerationLocales = "de-DE" | "fr-FR" | "pl-PL";
+
 export interface GenerationConfig {
   seed: string;
+  locale: GenerationLocales;
 }
 
 export interface UsersState {
@@ -16,6 +19,7 @@ const initialState: UsersState = {
   data: [],
   generationConfig: {
     seed: "",
+    locale: "de-DE",
   },
 };
 

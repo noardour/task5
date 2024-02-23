@@ -10,6 +10,10 @@ export default class UserGenerator {
     this.#counter = 0;
   }
 
+  setFaker(faker: Faker) {
+    this.#faker = faker;
+  }
+
   setSeed(seed: number | undefined) {
     this.#faker.seed(seed);
   }
