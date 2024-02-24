@@ -1,10 +1,11 @@
-import { Box, Input, MenuItem, Select, SelectChangeEvent, Slider, TextField, Toolbar } from "@mui/material";
-import { ChangeEventHandler, FC, useEffect, useState } from "react";
+import { Box, IconButton, Input, MenuItem, Select, SelectChangeEvent, Slider, TextField, Toolbar } from "@mui/material";
+import { ChangeEventHandler, FC, MouseEventHandler, useEffect, useState } from "react";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 import { selectGenerationConfig } from "./usersSelectors";
 import { GenerationConfig, GenerationLocales, setGenerationConfig } from "./usersSlice";
 import useDebounce from "../../hooks/useDebounce";
+import ShuffleIcon from "@mui/icons-material/Shuffle";
 
 const UserToolbar: FC = () => {
   const generationConfig = useAppSelector(selectGenerationConfig);
@@ -23,6 +24,10 @@ const UserToolbar: FC = () => {
 
   const handleSeed: ChangeEventHandler<HTMLInputElement> = (e) => {
     setState({ ...state, seed: e.target.value });
+  };
+
+  const handleRandomButton: MouseEventHandler = () => {
+    setState({ ...state, seed: `${Math.round(Math.random() * 1000000000000000)}` });
   };
 
   const handleRegion = (e: SelectChangeEvent<GenerationLocales>) => {
@@ -44,7 +49,12 @@ const UserToolbar: FC = () => {
         <MenuItem value="fr-FR">Франция</MenuItem>
         <MenuItem value="pl-PL">Польша</MenuItem>
       </Select>
-      <TextField size="small" label="Seed:" type="number" name="seed" value={state.seed} onInput={handleSeed} />
+      <Box>
+        <TextField size="small" label="Seed:" type="number" name="seed" value={state.seed} onInput={handleSeed} />
+        <IconButton onClick={handleRandomButton}>
+          <ShuffleIcon />
+        </IconButton>
+      </Box>
       <Box sx={{ display: "flex", gap: "30px" }}>
         <Slider value={state.errCount} onChange={handleErrSlider} min={0} max={10} step={0.01} sx={{ width: "150px" }} />
         <Input
