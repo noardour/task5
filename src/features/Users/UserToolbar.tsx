@@ -56,7 +56,7 @@ const UserToolbar: FC = () => {
         </IconButton>
       </Box>
       <Box sx={{ display: "flex", gap: "30px" }}>
-        <Slider value={state.errCount} onChange={handleErrSlider} min={0} max={10} step={0.01} sx={{ width: "150px" }} />
+        <Slider value={state.errCount} onChange={handleErrSlider} min={0} max={10} step={0.1} sx={{ width: "150px" }} />
         <Input
           value={state.errCount}
           onChange={handleErrInput}
